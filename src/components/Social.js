@@ -13,20 +13,23 @@ function Social({ choixReseau, handleChoixReseau, setChoixReseau }) {
     <Box
       sx={{
           textAlign: "center",
+          border: 1,
+          my: 3,
+          p: 3,
         }}
     >
       <Box
         sx={{
           textAlign: "center",
           fontSize: "2rem",
-          my: 1,
+          my: 2,
         }}
       >
         Reseaux sociaux
       </Box>
       {choixReseau.map(({ reseau, url, tempId }, indexChoixReseau) => (
         <div key={tempId}>
-          <TextField
+          <TextField margin="dense"
             select
             label="Choisir un réseau"
             value={reseau}
@@ -46,7 +49,7 @@ function Social({ choixReseau, handleChoixReseau, setChoixReseau }) {
             ""
           </TextField>
 
-          <TextField
+          <TextField margin="dense"
             value={url}
             onChange={(event) =>
               handleChoixReseau(event, "url", indexChoixReseau)
