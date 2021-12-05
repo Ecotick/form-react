@@ -9,6 +9,7 @@ import Details from "./components/Details";
 import Social from "./components/Social";
 import Initiatives from "./components/Initiatives";
 import Tags from "./components/Tags";
+import { business } from "./data/businessType";
 import { initialChoixReseau } from "./data/socialNetworks";
 import { initialChoixInitiative } from "./data/initiativesType";
 // import { initialChoixTag } from "./data/tagsType";
@@ -16,6 +17,9 @@ import { initialChoixInitiative } from "./data/initiativesType";
 function App() {
   // const [reseaux, setReseaux] = useState(selectReseauBox[0].value);
   // const [pseudoReseaux, setPseudoReseaux] = useState("");
+  const [businessData, setBusinessData] = useState({
+    "Type de commerce": business[0],
+  });
   const [choixReseau, setChoixReseau] = useState([{ ...initialChoixReseau() }]);
 
   const handleChoixReseau = (event, target, currentIndex) => {
@@ -24,7 +28,9 @@ function App() {
     setChoixReseau(tempChoixReseau);
   };
 
-  const [choixInitiative, setChoixInitiative] = useState([{ ...initialChoixInitiative() }]);
+  const [choixInitiative, setChoixInitiative] = useState([
+    { ...initialChoixInitiative() },
+  ]);
 
   const handleChoixInitiative = (event, target, currentIndex) => {
     const tempChoixInitiative = [...choixInitiative];
@@ -49,7 +55,10 @@ function App() {
         <Media />
 
         {/* ----------------Container 2 ----------------------- */}
-        <Details />
+        <Details
+          businessData={businessData}
+          setBusinessData={setBusinessData}
+        />
 
         {/* --------------- Container 3 ----------------------- */}
         <Social
@@ -65,9 +74,9 @@ function App() {
         <Tags
           choixTag={choixTag}
           handleChoixTag={handleChoixTag}
-          setChoixTag={setChoixTag}        
+          setChoixTag={setChoixTag}
         />
-      </ Container>
+      </Container>
     </div>
   );
 }
