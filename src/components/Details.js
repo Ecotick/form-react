@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { MenuItem } from "@mui/material";
+import { Grid, MenuItem } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
@@ -10,69 +10,45 @@ import { business } from "../data/businessType";
 function Details({ businessData, setBusinessData }) {
   return (
     // ---------- Container
-    <Box
-      component="form"
-      sx={{
-        mx: "auto",
-        width: 400,
-        my: 2,
-        border: 1,
-        borderRadius: 1,
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      {/* ---------- Title */}
-      <Box
-        sx={{
-          textAlign: "center",
-          fontSize: "2rem",
-          my: 1,
-        }}
-      >
-        Coordonnées
-      </Box>
-
-      <Box
-        sx={{
-          textAlign: "center",
-        }}
-      >
-        {contact.map((item) => {
-          return (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {item.icon}
-              <TextField
-                label={item.label}
-                sx={{
-                  mx: 1,
-                  width: 150,
-                }}
-                value={businessData[item.label]}
-                onChange={(event) =>
-                  setBusinessData({
-                    ...businessData,
-                    [item.label]: event.target.value,
-                  })
-                }
-              />
-            </Box>
-          );
-        })}
+    <Grid container spacing={2} sx={{ border: 1, borderRadius: 1 }}>
+      {/* ---------- Title ---------- */}
+      <Grid item xs={12}>
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "2rem",
+            my: "5",
           }}
         >
+          Coordonnées
+        </Box>
+      </Grid>
+
+      <Grid item container spacing={2}>
+        {contact.map((item) => {
+          return (
+            <Grid item>
+              <Grid item>
+                {item.icon}
+                <TextField
+                  label={item.label}
+                  sx={{
+                    mx: 1,
+                    my: 1,
+                  }}
+                  value={businessData[item.label]}
+                  onChange={(event) =>
+                    setBusinessData({
+                      ...businessData,
+                      [item.label]: event.target.value,
+                    })
+                  }
+                />
+              </Grid>
+            </Grid>
+          );
+        })}
+        <Grid item>
           <AssignmentIcon />
           <TextField
             select
@@ -80,7 +56,7 @@ function Details({ businessData, setBusinessData }) {
             value={businessData["Type de commerce"]}
             sx={{
               mx: 1,
-              width: 150,
+              my: 1,
             }}
             onChange={(event) =>
               setBusinessData({
@@ -96,16 +72,9 @@ function Details({ businessData, setBusinessData }) {
             ))}
             ""
           </TextField>
-
-          {/* <TextField
-              value={url}
-              onChange={(event) =>
-                handleChoixReseau(event, "url", indexChoixReseau)
-              }
-            /> */}
-        </Box>
-      </Box>
-    </Box>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 

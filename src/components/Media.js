@@ -15,20 +15,22 @@ const Input = styled("input")({
   display: "none",
 });
 
-function Media() {
+function Media({ storefrontUrl, setStorefrontUrl, logoUrl, setLogoUrl }) {
   const [storefrontAsFile, setStorefrontAsFile] = useState(null);
-  const [storefrontUrl, setStorefrontUrl] = useState("");
   const [logoAsFile, setLogoAsFile] = useState(null);
-  const [logoUrl, setLogoUrl] = useState("");
 
   useEffect(() => {
-    if (storefrontAsFile !== null) {
+    // Nullish coalescing operator (??) means --> when storefrontAsFile is null or undefined return false
+    // otherwise return storefrontAsFile
+    if (storefrontAsFile ?? false) {
       handleUpload(storefrontAsFile, setStorefrontAsFile, setStorefrontUrl);
     }
   }, [storefrontAsFile]);
 
   useEffect(() => {
-    if (logoAsFile !== null) {
+    // Nullish coalescing operator (??) means --> when logoAsFile is null or undefined return false
+    // otherwise return logoAsFile
+    if (logoAsFile ?? false) {
       handleUpload(logoAsFile, setLogoAsFile, setLogoUrl);
     }
   }, [logoAsFile]);

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
-import { Container, CssBaseline } from "@mui/material";
+import { Container, CssBaseline, Grid } from "@mui/material";
+import { Box } from "@mui/system";
 
 import Title from "./components/Title";
 import Media from "./components/Media";
@@ -12,16 +13,19 @@ import Tags from "./components/Tags";
 import { business } from "./data/businessType";
 import { initialChoixReseau } from "./data/socialNetworks";
 import { initialChoixInitiative } from "./data/initiativesType";
-// import { initialChoixTag } from "./data/tagsType";
+import { initialChoixTag } from "./data/tagsType";
+import Localization from "./components/Localization";
 
 function App() {
-  // const [reseaux, setReseaux] = useState(selectReseauBox[0].value);
-  // const [pseudoReseaux, setPseudoReseaux] = useState("");
+  const [storefrontUrl, setStorefrontUrl] = useState("");
+
+  const [logoUrl, setLogoUrl] = useState("");
+
   const [businessData, setBusinessData] = useState({
     "Type de commerce": business[0],
   });
-  const [choixReseau, setChoixReseau] = useState([{ ...initialChoixReseau() }]);
 
+  const [choixReseau, setChoixReseau] = useState([{ ...initialChoixReseau() }]);
   const handleChoixReseau = (event, target, currentIndex) => {
     const tempChoixReseau = [...choixReseau];
     tempChoixReseau[currentIndex][target] = event.target.value;
@@ -31,53 +35,65 @@ function App() {
   const [choixInitiative, setChoixInitiative] = useState([
     { ...initialChoixInitiative() },
   ]);
-
   const handleChoixInitiative = (event, target, currentIndex) => {
     const tempChoixInitiative = [...choixInitiative];
     tempChoixInitiative[currentIndex][target] = event.target.value;
     setChoixInitiative(tempChoixInitiative);
   };
 
-  const [choixTag, setChoixTag] = useState([""]);
-
-  const handleChoixTag = (tag, indexChoixTag) => {
-    const tempChoixTag = [...choixTag];
-    tempChoixTag[indexChoixTag] = tag;
-    setChoixTag(tempChoixTag);
-  };
+  const [choixTag, setChoixTag] = useState([{ ...initialChoixTag() }]);
 
   return (
-    <div className="App">
+    <Container maxWidth="xl">
       <CssBaseline />
-      <Container maxWidth="sm">
-        <Title />
-        {/* ----------------Container 1 ----------------------- */}
-        <Media />
+      <Grid container spacing={5}>
+        <Grid item xs={12}>
+          <Title />
+        </Grid>
+        {/* ---------------- Media Conponent ----------------------- */}
+        <Grid item xs={4}>
+          <Media
+            {...{ storefrontUrl, setStorefrontUrl, logoUrl, setLogoUrl }}
+          />{" "}
+        </Grid>
 
-        {/* ----------------Container 2 ----------------------- */}
-        <Details
-          businessData={businessData}
-          setBusinessData={setBusinessData}
-        />
+        {/* ---------------- Contact Details Component ----------------------- */}
+        <Grid item xs={5}>
+          <Details
+            businessData={businessData}
+            setBusinessData={setBusinessData}
+          />{" "}
+        </Grid>
 
-        {/* --------------- Container 3 ----------------------- */}
-        <Social
-          choixReseau={choixReseau}
-          handleChoixReseau={handleChoixReseau}
-          setChoixReseau={setChoixReseau}
-        />
-        <Initiatives
-          choixInitiative={choixInitiative}
-          handleChoixInitiative={handleChoixInitiative}
-          setChoixInitiative={setChoixInitiative}
-        />
-        <Tags
-          choixTag={choixTag}
-          handleChoixTag={handleChoixTag}
-          setChoixTag={setChoixTag}
-        />
-      </Container>
-    </div>
+        {/* --------------- Initiatives Component ----------------------- */}
+        <Grid item xs={3}>
+          <Initiatives
+            choixInitiative={choixInitiative}
+            handleChoixInitiative={handleChoixInitiative}
+            setChoixInitiative={setChoixInitiative}
+          />{" "}
+        </Grid>
+
+        {/* --------------- Social Network Component ----------------------- */}
+        <Grid item xs={4}>
+          <Social
+            choixReseau={choixReseau}
+            handleChoixReseau={handleChoixReseau}
+            setChoixReseau={setChoixReseau}
+          />{" "}
+        </Grid>
+
+        {/* --------------- Tags Component ----------------------- */}
+        <Grid item xs={4}>
+          <Tags choixTag={choixTag} setChoixTag={setChoixTag} />{" "}
+        </Grid>
+
+        {/* --------------- Localization Component ----------------------- */}
+        <Grid item xs={4}>
+          <Localization {...{ businessData, setBusinessData }} />{" "}
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
