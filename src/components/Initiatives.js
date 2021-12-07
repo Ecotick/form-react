@@ -24,7 +24,7 @@ function Initiatives({
         textAlign: "center",
         border: 1,
         my: 3,
-        p: 3,
+        p: 1,
       }}
     >
       <Box
@@ -34,7 +34,7 @@ function Initiatives({
           my: 2,
         }}
       >
-        Sélectionner vos initiatives
+        Initiatives
       </Box>
       {choixInitiative.map(({ initiative, tempId }, indexChoixInitiative) => (
         <div key={tempId}>

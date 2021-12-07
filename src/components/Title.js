@@ -2,7 +2,7 @@ import React from "react";
 
 function Title() {
   return (
-    <div className="title">
+    <div style={{ textAlign: "center" }}>
       <h1>Inscription commerçant</h1>
     </div>
   );
