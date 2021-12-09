@@ -52,7 +52,7 @@ function Media({ storefrontUrl, setStorefrontUrl, logoUrl, setLogoUrl }) {
       </Box>
       <Grid container>
         {/* ------------ Storefront ---------- */}
-        <Grid item xs={6} direction="column">
+        <Grid item xs={6}>
           <Card sx={{ maxWidth: 245 }}>
             {/* <CardActionArea onClick={() => alert("Click")}> */}
             <div
@@ -88,7 +88,7 @@ function Media({ storefrontUrl, setStorefrontUrl, logoUrl, setLogoUrl }) {
         </Grid>
 
         {/* ---------- Logo ---------- */}
-        <Grid item xs={6} direction="column">
+        <Grid item xs={6}>
           <Card sx={{ maxWidth: 245 }}>
             {/* <CardActionArea onClick={() => alert("Click")}> */}
             <div
