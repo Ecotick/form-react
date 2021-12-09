@@ -34,6 +34,12 @@ function Localization({ businessData, setBusinessData }) {
           setGeoPoint((geoPoint) => {
             return {
               ...geoPoint,
+              geoPostal: res.features[0].properties.label,
+            };
+          });
+          setGeoPoint((geoPoint) => {
+            return {
+              ...geoPoint,
               lng: res.features[0].geometry.coordinates[0],
             };
           });
@@ -56,6 +62,15 @@ function Localization({ businessData, setBusinessData }) {
       }}
     >
       <Grid container my={2} mx={2}>
+        <TextField
+          disabled
+          id="outlined-disabled"
+          defaultValue="Inconnue"
+          value={geoPoint.geoPostal}
+          label="Adresse prise en compte"
+          margin="normal"
+          sx={{ width: "90%" }}
+        />
         <TextField
           disabled
           id="outlined-disabled"

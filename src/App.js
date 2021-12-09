@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./App.css";
 
 import { Container, CssBaseline, Grid } from "@mui/material";
-import { Box } from "@mui/system";
+// import { Box, grid } from "@mui/system";
+import { Button } from "@mui/material";
 
 import Title from "./components/Title";
 import Media from "./components/Media";
@@ -15,12 +16,12 @@ import { initialChoixReseau } from "./data/socialNetworks";
 import { initialChoixInitiative } from "./data/initiativesType";
 import { initialChoixTag } from "./data/tagsType";
 import Localization from "./components/Localization";
+import { registerStore } from "./firebase";
+import { GeoPoint } from "@firebase/firestore";
 
 function App() {
   const [storefrontUrl, setStorefrontUrl] = useState("");
-
   const [logoUrl, setLogoUrl] = useState("");
-
   const [businessData, setBusinessData] = useState({
     "Type de commerce": business[0],
   });
@@ -43,13 +44,32 @@ function App() {
 
   const [choixTag, setChoixTag] = useState([{ ...initialChoixTag() }]);
 
+  const handleValidateButton = () => {
+    const geoloc = new GeoPoint(businessData.lat, businessData.lng);
+    const businessDocument = {
+      ...businessData,
+      storefrontUrl,
+      logoUrl,
+      reseaux: choixReseau,
+      initiatives: choixInitiative,
+      tags: choixTag,
+      geoloc,
+    };
+    delete businessDocument.lat;
+    delete businessDocument.lng;
+    const user = registerStore(businessDocument);
+  };
+
   return (
     <Container maxWidth="xl">
       <CssBaseline />
       <Grid container spacing={5}>
-        <Grid item xs={12}>
-          <Title />
+        {/* <Grid item xs={12}> */}
+        <Title />
+        <Grid item my={2} xs={2} onClick={handleValidateButton}>
+          <Button variant="contained">Valider</Button>
         </Grid>
+        {/* </Grid> */}
         {/* ---------------- Media Conponent ----------------------- */}
         <Grid item xs={4}>
           <Media

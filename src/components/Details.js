@@ -27,7 +27,7 @@ function Details({ businessData, setBusinessData }) {
       <Grid item container spacing={2}>
         {contact.map((item) => {
           return (
-            <Grid item>
+            <Grid item key={item.id}>
               <Grid item>
                 {item.icon}
                 <TextField
