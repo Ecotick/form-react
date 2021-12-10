@@ -4,6 +4,7 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WebIcon from "@mui/icons-material/Web";
+import { business } from "../data/businessType";
 
 export const contact = [
   {
@@ -61,3 +62,12 @@ export const contact = [
     label: "Web site",
   },
 ];
+
+export const initialContact = {
+  ...contact.reduce(
+    (prev, item) => {
+      return { ...prev, [item.label]: "" };
+    },
+    { "Type de commerce": business[0] }
+  ),
+};

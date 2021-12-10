@@ -11,20 +11,19 @@ import Details from "./components/Details";
 import Social from "./components/Social";
 import Initiatives from "./components/Initiatives";
 import Tags from "./components/Tags";
-import { business } from "./data/businessType";
+// import { business } from "./data/businessType";
 import { initialChoixReseau } from "./data/socialNetworks";
 import { initialChoixInitiative } from "./data/initiativesType";
 import { initialChoixTag } from "./data/tagsType";
 import Localization from "./components/Localization";
 import { registerStore } from "./firebase";
 import { GeoPoint } from "@firebase/firestore";
+import { initialContact } from "./data/contact";
 
 function App() {
   const [storefrontUrl, setStorefrontUrl] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
-  const [businessData, setBusinessData] = useState({
-    "Type de commerce": business[0],
-  });
+  const [businessData, setBusinessData] = useState(initialContact);
 
   const [choixReseau, setChoixReseau] = useState([{ ...initialChoixReseau() }]);
   const handleChoixReseau = (event, target, currentIndex) => {
@@ -57,7 +56,13 @@ function App() {
     };
     delete businessDocument.lat;
     delete businessDocument.lng;
-    const user = registerStore(businessDocument);
+    registerStore(businessDocument);
+    setStorefrontUrl("");
+    setLogoUrl("");
+    setBusinessData(initialContact);
+    setChoixReseau([{ ...initialChoixReseau() }]);
+    setChoixInitiative([{ ...initialChoixInitiative() }]);
+    setChoixTag([{ ...initialChoixTag() }]);
   };
 
   return (
