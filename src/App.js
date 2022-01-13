@@ -70,9 +70,11 @@ function App() {
       <CssBaseline />
       <Grid container spacing={5}>
         {/* <Grid item xs={12}> */}
-        <Title />
-        <Grid item my={2} xs={2} onClick={handleValidateButton}>
-          <Button variant="contained">Valider</Button>
+        <Grid item container my={1} xs={12}>
+          <Title />
+          <Button variant="contained" onClick={handleValidateButton}>
+            Valider
+          </Button>
         </Grid>
         {/* </Grid> */}
         {/* ---------------- Media Conponent ----------------------- */}
